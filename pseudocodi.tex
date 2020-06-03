@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+
+\usepackage[catalan]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{mathtools}
+
+\usepackage{algorithm2e}
+\SetKwInOut{entrada}{entrada}
+\SetKwInOut{sortida}{sortida}
+\SetKwFor{perCada}{per cada}{fes}{fi}
+\SetKwFor{per}{per}{fes}{fi}
+\SetKwIF{si}{sinoSi}{sino}{si}{aleshores}{sinó, si}{sinó}{fi}
+\SetKw{fins}{fins}
+\SetKw{retorna}{retorna}
+\SetKwComment{comentari}{\# }{}
+\DontPrintSemicolon
+
+
+\begin{document}
+\begin{algorithm}[h]
+	\SetKwData{filt}{filtració}
+	\SetKwData{jove}{jove}
+	\SetKwData{kmax}{k\_max}
+	\SetKwArray{hom}{hom}
+	\SetKwArray{betti}{betti}
+	\SetKwFunction{cares}{cares}
+	\SetKwFunction{dim}{dim}
+	\SetKwFunction{suma}{suma}
+	
+	\entrada{\filt, una llista que guarda tots els símplexs de la filtració ordenats de
+	menor a major \( k \)}
+	\sortida{\betti, una llista que guarda el número de Betti de cada dimensió a cada pas \(
+	k \) de la filtració}
+	\BlankLine
+	\per{\( k = 0 \) \fins \kmax} {
+		\perCada{c de \filt\( \!_k \)}{
+			\si{\suma{\hom{f}, f \( \in \) c.\cares} \( = 0 \)}{
+				\comentari{El símplex tanca un cicle}
+				incrementar \betti{k, c.\dim} per 1 \;
+			}
+			\sino{
+				\comentari{Indentifiquem la cara més jove amb la suma de la resta}
+				\( \jove \leftarrow \) cara més jove de c.\cares \;
+				\hom{\jove} \( \leftarrow \) \suma{\hom{f}, f \( \in \) c.\cares
+				i f \( \neq \) \jove} \;
+			}
+		}
+	}
+	\retorna \betti
+\end{algorithm}
+
+
+\end{document}
