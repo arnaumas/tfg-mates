@@ -1,0 +1,53 @@
+\documentclass[12pt]{article}
+
+\usepackage[catalan]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\title{Homologia Persistent}
+\author{Arnau Mas}
+\date{2020}
+
+\begin{document}
+\maketitle
+
+\section{Context de les dades}
+Els metges prenen dades en dos dominis diferents: per una banda el \emph{domini radiòmic},
+que consisteix en totes les observacions que es poden fer del tumor: eixos major i menor,
+elongació, etc., i d'altra banda el \emph{domini genòmic}, que consisteix en
+característiques extretes de l'ADN del pacient. A partir d'aquests dos conjunts de dades
+es vol entendre l'eficàcia d'un tractament concret contra el càncer de pulmó, és a dir
+intentar trobar quines són les característiques radiòmiques o genòmiques que influeixen en
+l'èxit o no del tractament. 
+
+\section{Explicació de les eines matemàtiques}
+Desenvolupar els següents punts per posar el lector en context
+\begin{itemize}
+	\item Topologia algebraica, complexos de cadenes, diferencial, cicles i vores, grups
+		d'homologia, números de Betti, homologia simplicial, homotopia. 
+	\item Homologia persistent, filtracions, grups d'homologia persistent, diagrames de
+		persistència.
+	\item Eines específiques per a la filtració que es fa servir: graf de \emph{mutual \( k
+		\)-nearest neighbours}, complexos de Cech i Viettoris-Rips i la seva relació,
+		construcció de la filtració a partir del graf de M\( k \)NN. 
+\end{itemize}
+
+\section{Justificació matemàtica del codi}
+Per una banda es podria justificar la construcció de la matriu d'adjacència del graf de
+M\( k \)NN, que fa servir la matriu de distàncies del núvol de punts.
+
+EL punt més rellevant és justificar el càlcul de l'homologia persistent. 
+
+\section{Discussió dels resultats del programa}
+Això queda subjecte a que acabi d'enllestir el programa i l'executi amb les dades. Per
+aquesta aplicació en concret hi ha dos paràmetres que interessen per a entendre quan és
+que un conjunt de punts és extrany o no: per una banda el seu temps de persistència, però
+també el número de punts que acumula (les classes extranyes són les que persisteixen
+molt i tenen pocs punts). Es podrien representar les classes (almenys pel cas de \( H^0
+\)) en un pla on un eix fos el nombre de punts que tenia en el moment en el que desapareix
+i l'altre el seu temps de vida. Pels grups d'homologia d'ordre superior no queda tan clar
+què vol dir el "número de punts" que conté una classe. 
+
+\end{document}
+
