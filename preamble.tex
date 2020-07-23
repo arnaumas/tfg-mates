@@ -1,0 +1,108 @@
+% -------------------
+% PACKAGES
+% Basic font setup
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Figures
+\usepackage{graphicx}
+\usepackage[font={footnotesize, sf}, labelfont=bf]{caption} 
+\graphicspath{{figs/}{../figs/}}
+
+% Maths tools
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{amsthm, thmtools}
+\usepackage{tikz-cd}
+
+% Format
+\usepackage{geometry}
+
+% References
+\usepackage{hyperref}
+\usepackage[english]{cleveref}
+\usepackage{biblatex}
+\usepackage{csquotes}
+
+% Utilites
+\usepackage{enumerate}
+
+% -------------------
+% CUSTOMISATION
+% Geometry setup
+\geometry{
+	a4paper,
+	right = 2.5cm,
+	left = 2.5cm,
+	bottom = 3cm,
+	top = 3cm
+}
+\renewcommand{\baselinestretch}{1.3}
+
+% -------------------
+% Reference setup
+\hypersetup{
+	colorlinks,
+	linkcolor = {red!50!blue},
+	citecolor = {red!50!blue},
+	urlcolor = {red!50!blue},
+	linktoc = page
+}
+
+% -------------------
+% Bibliography
+\addbibresource{refs.bib}
+
+% -------------------
+% Theorem environments
+\newcommand{\qedtriangle}{\ensuremath{\triangle}}
+\newcommand{\qedtriangledown}{\ensuremath{\bigtriangledown}}
+
+\declaretheoremstyle[spaceabove=6pt, spacebelow=6pt, headfont=\bfseries,
+notefont=\normalfont, notebraces={(}{)}, qed=\qedtriangle]{definition}
+\declaretheoremstyle[spaceabove=6pt, spacebelow=6pt, headfont=\bfseries,
+notefont=\normalfont, notebraces={(}{)}, qed=\qedtriangledown]{example}
+
+\declaretheorem[name=Theorem, refname={theorem,theorems}, Refname={Theorem,Theorem},
+numberwithin = chapter ]{theorem}
+
+\declaretheorem[name=Proposition, refname={proposition,propositions},
+Refname={Proposition,Propositions}, numberlike=theorem]{proposition}
+
+\declaretheorem[name=Lemma, refname={lemma,lemmas},
+Refname={Lemma,Lemmas}, numberlike=theorem]{lemma}
+
+\declaretheorem[name=Definition, style=definition, refname={definition,definitions},
+Refname={Definitio,Definitions}, numberlike=theorem]{definition}
+
+\declaretheorem[name=Example, style=example, refname={example,examples},
+Refname={Example,Examples}, numberlike=theorem]{example}
+
+\declaretheorem[name=Remark, style=remark, refname={remark,remarks},
+Refname={Remark,Remarks}, numberlike=theorem]{remark}
+
+% -------------------
+% LAYOUT
+\usepackage[bf,sf,small,pagestyles]{titlesec}
+\usepackage{titling}
+
+% Pagestyle defintions
+\newpagestyle{main}[\sffamily \footnotesize]{
+	\sethead*{\ifthesection{{\bfseries \thesection} \sectiontitle}{}}{}{{\bfseries Chapter \thechapter.} \chaptertitle}
+	\headrule
+	\footrule
+	\setfoot*{}{}{\thepage}
+}
+\renewpagestyle{plain}[\sffamily \footnotesize]{
+	\footrule
+	\setfoot*{}{}{\thepage}
+}
+\renewpagestyle{empty}{}
+
+% Format of chapter titles
+\titleformat{\chapter}[block]{\sffamily \bfseries \Huge}{\filleft \large Chapter \Huge \thechapter\\}{0pt}{\Huge \titlerule[1pt] \vspace{1ex} \filleft}
+
+% -------------------
+% SUBFILES
+\usepackage{subfiles}
