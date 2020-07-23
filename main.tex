@@ -1,0 +1,32 @@
+\documentclass[12pt]{book}
+\input{preamble.tex}
+\input{commands.tex}
+
+\title{}
+\author{Arnau Mas}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\pagestyle{plain}
+\frontmatter
+\tableofcontents
+
+\mainmatter
+\pagestyle{main}
+
+\chapter{The problem}
+\subfile{chapters/context}
+
+\chapter{The theory of homology}
+\subfile{chapters/2_homology}
+
+\chapter{The algorithm and its implementation}
+\subfile{chapters/algorithm}
+
+\backmatter
+\printbibliography
+
+\end{document}

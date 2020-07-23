@@ -1,0 +1,27 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\section{The problem}
+The data that has been used for the analysis comes from a study in the field of radiomics.
+The aim of radiomics is to establish a relationship between a patient's response to
+treatment and what are known as \emph{radiomic features} of a lesion. These are parameters
+which give a systematic description of a feature gathered from scans. The hypothesis is
+that there is information that can be extracted from this more systematic study of medical
+scans, as opposed to the more traditional qualitative observation by a medical
+professional. 
+
+On a practical level, the radiomic features are extracted from a 3d reconstruction of the
+lesion, built from a series of 2d sectional scans. It is then the work of a medical
+professional to manually delimit the contours of the actual lesion, which is known as the
+\emph{region of interest}. This process is called \emph{segmentation}. Once this is done,
+the actual work of computing the radiomic features takes place. For the data at hand,
+these had been extracted with the \textsf{PyRadiomics} Python package \cite{pyradiomics}.
+These features include shape parameters of the triangular mesh determined by the segmented
+region of interest, as well as statistical descriptors of the distribution of pixel
+intensity in the region of interest. 
+
+
+
+
+
+\end{document}
