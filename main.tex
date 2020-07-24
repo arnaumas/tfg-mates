@@ -12,19 +12,24 @@
 
 \pagestyle{plain}
 \frontmatter
-\tableofcontents
+{ \small \tableofcontents }
+
+\pagebreak
+\addcontentsline{toc}{chapter}{Preface}
+\section*{Preface}
+Lorem ipsum
 
 \mainmatter
 \pagestyle{main}
 
-\chapter{The problem}
-\subfile{chapters/context}
+\chapter{The problem}\label{ch:problem}
+\subfile{chapters/chapter_1}
 
 \chapter{The theory of homology}
-\subfile{chapters/2_homology}
+\subfile{chapters/chapter_2}
 
 \chapter{The algorithm and its implementation}
-\subfile{chapters/algorithm}
+\subfile{chapters/chapter_3}
 
 \backmatter
 \printbibliography
