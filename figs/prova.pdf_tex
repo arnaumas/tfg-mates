@@ -1,0 +1,87 @@
+%% Creator: Inkscape 1.0 (1.0+r73+1), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'prova.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{460.79998779bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.75000003)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{prova.pdf}}%
+    \put(0.16022727,0.05081939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{prova.pdf}}%
+    \put(0.27765152,0.05081939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1.5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{prova.pdf}}%
+    \put(0.39507575,0.05081939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}2.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{prova.pdf}}%
+    \put(0.51250002,0.05081939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}2.5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{prova.pdf}}%
+    \put(0.62992428,0.05081939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}3.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{prova.pdf}}%
+    \put(0.74734848,0.05081939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}3.5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{prova.pdf}}%
+    \put(0.86477274,0.05081939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}4.0\end{tabular}}}}%
+    \put(0.50533855,0.02113595){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textsl{α}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{prova.pdf}}%
+    \put(0.10980903,0.10050516){\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}2.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{prova.pdf}}%
+    \put(0.10980903,0.18800518){\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}2.5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{prova.pdf}}%
+    \put(0.10980903,0.2755052){\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}3.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{prova.pdf}}%
+    \put(0.10980903,0.36300518){\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}3.5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{prova.pdf}}%
+    \put(0.10980903,0.4505052){\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}4.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{prova.pdf}}%
+    \put(0.10980903,0.5380052){\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}4.5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{prova.pdf}}%
+    \put(0.10980903,0.6255052){\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}5.0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{prova.pdf}}%
+  \end{picture}%
+\endgroup%
