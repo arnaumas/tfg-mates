@@ -2,9 +2,17 @@
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\F}{\mathbb{F}}
 \renewcommand{\S}{\mathfrak{S}}
+
+\newcommand{\Top}{\mathsf{Top}}
+\newcommand{\Grp}{\mathsf{Grp}}
+\newcommand{\Ab}{\mathsf{Ab}}
+\newcommand{\Simp}{\mathsf{Simp}}
+\newcommand{\Ch}{\mathsf{Ch}}
+
 
 \makeatletter
 \newcommand*{\defeq}{\mathrel{\rlap{%
@@ -23,3 +31,9 @@
 \newcommand{\MKNN}{M\( k \)NN }
 \newcommand{\hombound}[2]{\bar{\partial}_{#1}^{#2}}
 
+% Cycles and boundaries
+\newcommand{\cyc}[1]{\ker{\partial}_{#1}}
+\newcommand{\bound}[1]{\im{\partial}_{#1}}
+
+\newcommand{\pcyc}[2]{\ker{\partial}_{#1}^{#2}}
+\newcommand{\pbound}[2]{\im{\partial}_{#1}^{#2}}
