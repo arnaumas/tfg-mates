@@ -1,2 +1,9 @@
 # Ignore reference articles and books
 refs/
+
+# Ignore compilation byproducts
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.toc
