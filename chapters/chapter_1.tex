@@ -1,27 +1,62 @@
 \documentclass[../main.tex]{subfiles}
 
 \begin{document}
-\section{The problem}
-The data that has been used for the analysis comes from a study in the field of radiomics.
-The aim of radiomics is to establish a relationship between a patient's response to
-treatment and what are known as \emph{radiomic features} of a lesion. These are parameters
-which give a systematic description of a feature gathered from scans. The hypothesis is
-that there is information that can be extracted from this more systematic study of medical
-scans, as opposed to the more traditional qualitative observation by a medical
-professional. 
+The present work is the result of an internship in the Interactive Augmented Modelling
+(IAM) at the Computer Vision Center (CVC). It is part of an ongoing collaboration,
+TOPiomics, between the IAM and the Radiomics Group at the Vall d'Hebron Institute of
+Oncology (VHIO).  
 
-On a practical level, the radiomic features are extracted from a 3d reconstruction of the
-lesion, built from a series of 2d sectional scans. It is then the work of a medical
-professional to manually delimit the contours of the actual lesion, which is known as the
-\emph{region of interest}. This process is called \emph{segmentation}. Once this is done,
-the actual work of computing the radiomic features takes place. For the data at hand,
-these had been extracted with the \textsf{PyRadiomics} Python package \cite{pyradiomics}.
-These features include shape parameters of the triangular mesh determined by the segmented
-region of interest, as well as statistical descriptors of the distribution of pixel
-intensity in the region of interest. 
+This chapter provides some background and context for the state of the study and the
+field of radiomics more broadly, as well as a description of how the results of this
+thesis fit into the bigger picture. 
 
+\section{Prior work}
+Radiomics is a relatively recent medical field. Its principal aim is to establish a
+relationship between a patient's response to treatment and what are known as
+\emph{radiomic features} of a lesion. These are parameters systematically extracted from
+scans of a lesion or other feature. The hypothesis is that there is information
+that can be extracted from this more systematic study of medical scans, which is not
+accessible through the more traditional qualitative observation by a medical professional.
+Furthermore, since imaging is much less invasive than other techniques such as biopsy, if
+reliable, radiomics could become a useful way of monitoring a patient's evolution and
+response. 
 
+However, since all of these features are extracted from clinical cases, the size of
+available data is necessarily limited. This means that traditional techniques
+from statistics and big data analysis which rely on large volumes of data are not well
+suited to radiomics. In this context, TOPiomics \cite{topiomics, attract} attempts to
+bridge the gap by employing tools from \emph{topological data analysis}. Specifically, the
+goal of TOPiomics is to detect outliers as early as possible, so that specialised
+treatments can be developed as soon as possible. The approach thus far is based on what is
+known as the \emph{Mutual \( k \)-Nearest Neighbours graph} \cite{outliers}. Nevertheless,
+there is an amount of parameter fiddling involved (the \( k \) in \( k \)-Nearest
+neighbours)	to guarantee that the results are accurate and not an artifact of the choice
+of \( k \). The idea was then to use \emph{persistent homology}, since it is suited to the
+study of the topological structure of a data set at various scales. , since it is suited
+to the study of the topological structure of a data set at various scales. 
 
+The work performed in this thesis is the implementation of a library which computes
+persistent homology and its application to radiomic datasets in an attempt to detect
+outliers. 
 
+\section{Radiomic data}
+The process of extracting radiomic features begins with the actual imaging of the lesion
+or tumour: a series of 2D sectional scans are obtained, from which a 3D reconstruction is
+assembled. It is then the work of a medical professional to manually delimit the contours
+of the actual lesion, which is known as the \emph{region of interest} or ROI. This process is
+called \emph{segmentation}. Once this is done, the actual work of computing the radiomic
+features takes place. For example, one can gather statistical descriptors of the
+distribution of brightness of the pixels in the ROI, or calculate geometric parameters of
+the mesh defined by the boundary of the ROI such as volume, surface area or sphericity.
+The Python package, \textsf{PyRadiomics} \cite{pyradiomics}, is built precisely for this
+task. 
 
+It is not obvious which of these features will best correlate with the response to
+treatment. Even worse, some of them might be highly dependent on the segmentaion of the
+ROI, so that if a different professional performs segments the ROI with slight variations,
+the value of the features changes wildly. It is desirable to select those featues which,
+first, are stable under variations in segmentation, called \emph{reproducible}, and are
+best correlated to the response to treatment. In \cite{features}, a study part of
+TOPiomics, this exact task is performed with lung tumour scans from the database at VHIO.
+The data from this study has been used as test data to test the library.
 \end{document}
