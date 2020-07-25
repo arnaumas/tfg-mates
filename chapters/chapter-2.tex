@@ -260,6 +260,10 @@ i.e. that every boundary is a cycle. This means the following definition makes s
 		H_n(C) \defeq \cyc{n} / \bound{n+1}.
 	\end{equation*}
 \end{definition}
+Two elements which are the same when projected onto the homology group are called
+\emph{homologous}. From the definition it is immediate to see that two chains are
+homologous if they differ by a boundary, i.e. \( c_1 \) is homologous to \( c_2 \) if
+there exists \( d \) such that \( c_1 = c_2 + \partial d \).
 
 \subsection{Simplicial chain complexes}
 The next step is building a chain complex out of the simplicial complexes we have built so
@@ -397,12 +401,16 @@ used as a tool to classify spaces, at least not in the most general setting.
 The easiest homology group to interpret is \( H_0 \), since it can be shown that \(
 \beta_0 \) is the number of connected components of the space. Higher homology groups
 have to do with \( n \)-dimensional holes in the space.  Indeed, a cycle which is not the
-boundary of anything indicates the presence of some sort of ``obstacle'' in the space. For
-instance, \( \beta_1 \) is 1 for \( S^1 \), which makes sense because \( S^1 \) is in some
-sense the prototypical 1-dimensional hole. For \( S^2 \), \( \beta_1 = 0 \) but \( \beta_2
-= 1 \), reflecting the fact that \( S^2 \) is ``hollow''. 
+boundary of anything indicates the presence of some sort of ``obstacle'' in the space.
+What it means for two simplicial chains to be homologous is that they are both the
+boundary of a higher dimensional chain, which is very similar, yet weaker, then the notion
+of homotopy. Therefore, if there is a cycle which is not homologous to zero, it means it
+cannot, very roughly speaking, be continuously deformed away.  instance, \( \beta_1 \) is
+1 for \( S^1 \), which makes sense because \( S^1 \) is in some sense the prototypical
+1-dimensional hole. For \( S^2 \), \( \beta_1 = 0 \) but \( \beta_2 = 1 \), reflecting the
+fact that \( S^2 \) is ``hollow''. 
 
-\section{The idea of persistence}\label{sec:persistence}
+\section{The idea of persistence}\label{sec:persistence} 
 So far we have seen various ways of extracting information related to the shape of our
 data using homology. All of this ways, however, carry with them an ammount of arbitrary
 choice. For example, both the Vietoris-Rips and Čech complexes depend on a scale parameter

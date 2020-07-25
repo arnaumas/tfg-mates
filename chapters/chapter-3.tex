@@ -128,49 +128,57 @@ This list is then sorted by birth, such that cliques born earlier appear first, 
 cliques with the same birth are sorted by increasing dimension. This guarantees that any
 simplex is always preceded by its faces, which is required for later computations. 
 
-\subsection{Justification of the algorithm}
+\subsection{Justification of the algorithm}\label{sec:justification}
 The main idea of the algorithm used to compute the persistent homology is taken from
-\cite{campos}. We now provide some justification as to why it works. 
+\cite{campos}. Informally, the idea is to start at the beginning of the filtration and to
+process every cimplex in order of appearance in the filtration. Whenever a new simplex is
+born one of two thing can happen: it either closes a cycle, thus a new class in a homology
+group appears, or it does not, in which case what used to be a cycle (because of how the
+filtration is sorted, the faces of a simplex always appear before it) is now the boundary
+of a simplex, and so it dies. In what folllows we make this precise. All of the following
+arguments rely on the fact that we are computing homology for coefficients in \( \F_2 \).
 
-Recall that the homology groups are defined as a quotient of the subgroup
-of cycles by the subgroup of boundaries. But we can just as well consider the quotient of
-the \emph{whole} chain group. More specifically, consider a filtration \( \set{K^i}_{i =
-0}^N \) and its chain complex, \( C_\ast(K^i) \). We then have the corresponding boundary
-morphisms,
-\begin{equation*}
-	\partial_p^i \colon C_p(K^i) \to C_{p-1}(K^i)
-\end{equation*}
-where the superscript \( i \) refers to the step of the filtration. The group of \( p
-\)-cycles is \( \ker{\partial_p^i} \) and the group of \( p \)-boundaries is \(
-\im{\partial_{p+1}^i} \). Since \( \partial_p \circ \partial_{p+1} = 0 \) the boundaries
-are a subgroup of the cycles, which means the homology groups are well defined. But the
-boundaries are a subgroup of \( C_p(K^i) \), which means we can
-define what we will call \emph{prehomology groups} by
-\begin{equation*}
-	P_p(K^i) = C_p(K^i) / \im{\partial_{p+1}^i}
-\end{equation*}
-which is the result of identifying all homologous chains, not just the cycles. Let's write
-\( \pi_p^i \) for the projection from \( C_p(K^i) \) onto \( P_p(K^i) \).
+First an observation. If we have a filtration \( K^0 \subseteq \dots \subseteq K^N \), we
+can always construct a new filtration, \( L^0 \subseteq \dots \subseteq L^M \), such that
+the difference between successive steps of \( L \) is a single simplex. Indeed, put \( L^0
+= K^0 \) and say \( K^i = K^{i-1} \cup \set{\sigma^i_1, \dots, \sigma^i_{l_i}} \). Then define
+\begin{gather*}
+	L^1 = L_0 \cup \set{\sigma_1^1} \\
+	L^{k} = L^{(k-1)} \cup \set{\sigma_k^1} \\
+	L^{l_1 + \dots + l_q + k} = L^{l_1 + \dots + l_q + (k-1)} \cup \set{\sigma_k^{q+1}}.
+\end{gather*}
+For this to acutally be a filtration, the order in which we add the simplices has to be
+such that every simplex is always preceded by its faces. And note \( K^i = L^{l_1 + \dots
++ l_i} \). So what we are doing is splitting every step of the filtration and creating a
+new filtration by adding simplicies one by one. 
 
-Now, because \( \im{\partial_{p+1}^i} \subseteq \ker{\partial_p^i} \), the boundary maps
-factor through the prehomology groups, which means the following is well-defined
-\begin{align*}
-	\hombound{p}{i} \colon P_p(K^i) & \longto P_{p-1}(K^i) \\
-	[c] & \longmapsto [\partial_p^i c]. 
-\end{align*}
-In particular,
-\begin{equation*}
-	\ker{\hombound{p}{i}} = H_p(K^i). 
-\end{equation*}
-Furthermore, essentially by definition, we have the identity
-\begin{equation*}
-	(\hombound{p}{i} \circ \pi_p^i)(\sigma) = (\pi_{p-1}^i \circ \partial_{p}^i)(\sigma)
-\end{equation*}
-and we will write \( b_p^i \) for this composition. 
-
-Now, consider a \( p \)-simplex \( \sigma \) which is in \( K^i \) but not in any of the previous
-steps of the filtration. Then two things can happen: either \( b^i(\sigma) \) is zero or
-it is not. If it is zero then 
+Consider a single step of \( L \), going from \( L^i \) to \( L^{i+1} \) by adding a
+single \( p \)-simplex \( \sigma \). All of the faces of \( \sigma \), \( w_0, \dots, w_p
+\) are in \( L^1 \). In particular, the sum \( w_0 + \dots + w_p \) is a cycle. Write \( \pi_p^i \) for the projection from the \( p \)-th chain
+group of the \( i \)-th step of the filtration, \( C_p(L^i) \), onto the \( p \)-th
+homology group at the \( i \)-th step, \( H_p(L^i) \). Now one of
+two things can happen:
+\begin{enumerate}[(i)]
+	\item if \( \pi_p^i(w_0 + \dots + w_n) = 0 \) then \( w_0 + \dots + w_n \) is already
+		the boundary of some other chain \emph{in \( L^i \)}, say \( c \). But in \( L^{i+1}
+		\) we have \( \partial \sigma = \partial c \), thus \( \partial(\sigma + c) = 0 \),
+		i.e. \( \sigma + c \) is a cycle. This is \( \sigma \) closing a cycle: think of \( c
+		\) as being the container and \( \sigma \) being the lid. And this cycle cannot be the
+		boundary of anything in \( L^{i+1} \) because \( \sigma \) is not the face of anything
+		in \( L^{i+1} \) (simplices are precede by their faces). Thus a new element of \(
+		H_p(L^{i+1}) \) has been born. 
+	\item if \( \pi_p^i(w_0 + \dots + w_n) \) is not zero then \( w_0 + \dots + w_p \) is
+		not the boundary of anything and \( \pi_p^i(w_0 + \dots + w_n) \) is a nonzero element
+		of \( H_{p-1}(L^i) \). But in \( L^{i+1} \), \( \partial \sigma = w_0 + \dots + w_n
+		\), thus \( \sigma \) kills this cycle. 
+\end{enumerate}
+Every cycle must be born and die at one of the steps of \( L \), so by doing this for
+every single simplex of the whole filtration we will detect the birh and death of every
+cycle. Now, when going back to the smaller filtration \( K \), it might very well be the
+case that several cycles are born and die in a single step of \( K \), since we are
+collapsing several steps of \( L \) into 1. This is essentially what is done in the code:
+look at every simplex as a step in a larger filtration and then keep all of the cycles
+that survive for at least a step in the original filtration. 
 
 
 \subsection{Computing the homology}
@@ -181,7 +189,7 @@ simplex.
 
 The elements of the chain group are linear combinations of simplices (of the same
 dimension), but since we are working over \( \F_2 \), this amounts to a list of simplices,
-which is what \texttt{Chain} stores\footnote{Infact we choose to work over \( \F_2 \)
+which is what \texttt{Chain} stores\footnote{In fact we choose to work over \( \F_2 \)
 precisely because of this reason.}. Furthermore, this class implements the addition of
 chains which, again because the field we ar working over has characteristic 2, reduces to
 taking the symmetric difference of the lists of simplices of the two chains we are adding.
@@ -203,7 +211,32 @@ boundaries of each of its constituent simplices. Again, this works because we ar
 coefficients from \( \F_2 \), so that, as explained in \cref{sec:different coefficients}
 the alternating signs that appear in the definition of the boundary all disappear. 
 
+The main issue with implementing the algorithm defined above is that we have no access to
+the projection \( \pi_p^i \). What we do however is to implement what is basically a
+memoised version of it by keeping track of what each simplex is
+homologous\footnote{Strictly speaking, the relationship of homology was only defined for
+cycles, but we can extend it to the quotient \( C_p(K^i)/\im{\partial} \).} to in a
+dictionary. Its keys are every simplex in the filtration and the values are instances of
+the \texttt{HomologyClass} class. The dictionary is modified to guarantee transitivity, so
+that when the value of a key changes, all other keys that had that value are updated
+accordingly. Any time we encounter a new simplex we know it is not homologous to anything
+else, so it is assigned a homology class which has itself as a representative. Then, as
+more simplices are encountered, new identifications take place. 
 
-
+So then we loop over every simplex stored in the filtration and compute the sum of the
+homology classes of its faces. If the result is zero, it means a new cycle was closed. If
+it is not then an identification takes place. If \( \sigma \) is the \( p \)-simplex being
+processed and \( w_0, \dots, w_p \) are its faces then, after \( \sigma \) has been added,
+we have
+\begin{equation*}
+	\pi_{p-1}^i(w_0 + \dots + w_p) = 0
+\end{equation*}
+so, we can solve for one of the faces as the sum of the rest, i.e.,
+\begin{equation*}
+	\pi_{p-1}^i(w_k) = \pi_{p-1}^i(w_0 + \dots + \hat{w}_k + \dots + w_p) = 0.
+\end{equation*}
+We do this for the youngest face of \( \sigma \) and update its homology class to one
+generated by the sum of all faces of \( \sigma \) except for it. This way we build up the
+projection map as we go along. 
 
 \end{document}
