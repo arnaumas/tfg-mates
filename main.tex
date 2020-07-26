@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[12pt, oneside]{book}
 \input{preamble.tex}
 \input{commands.tex}
 
@@ -12,7 +12,7 @@
 
 \pagestyle{plain}
 \frontmatter
-{ \small \tableofcontents }
+{\footnotesize \tableofcontents}
 
 \pagebreak
 \addcontentsline{toc}{chapter}{Preface}
@@ -28,13 +28,14 @@ Lorem ipsum
 \chapter{An overview of homology theory}
 \subfile{chapters/chapter-2}
 
-\chapter{The algorithm and its implementation}
+\chapter{The implementation of the detector}
 \subfile{chapters/chapter-3}
 
 \chapter{The results}
 \subfile{chapters/chapter-4}
 
 \backmatter
+\pagestyle{plain}
 \printbibliography
 
 \end{document}

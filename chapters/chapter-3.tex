@@ -1,13 +1,17 @@
 \documentclass[../main.tex]{subfiles}
 
 \begin{document}
+This chapter is a detailed look at how the outlier detector is actually implemented. We
+put special emphasis on the mathematical considerations behind each step and how they
+reflect on the actual code. The whole library is freely available at \url{https://github.com/arnaumas/mknn_homology/}. 
+
 \section{Why mutual \texorpdfstring{\( k \)}{k}-nearest neighbours graphs?}
 As stated in \cref{sec:prior work}, the first approach to identify clusters and outliers
 in a dataset was by finding the maximal cliques of the mutual \( k \)-nearest neighbours
-graph, \MKNN graph for short. Let's describe how it is constructed to better understand
-its usefulness. 
+graph, \MKNN graph for short. Let's describe how it is constructed to understand why it is
+useful. 
 
-One starts with the Nearest Neighbours graph. Given a point cloud, \( C
+One starts with the nearest neighbours graph. Given a point cloud, \( C
 \), its Nearest Neighbour directed graph is constructed according to the following
 prescription: there is an edge from \( p \) to \( q \) if and only if \( d(p,q) = \min_{r
 	\in C} d(p,r) \), so \( q \) is the closest point to \( p \), its \emph{nearest
@@ -18,7 +22,7 @@ d(p_2,p_3) \) and suppose \( d_{12} < d_{23} \). Then, \( p_2 \) is \( p_1 \)'s
 nearest-neighbour, and vice versa. Yet \( p_2 \) is also \( p_3 \)'s nearest neighbour but
 neither \( p_1 \) nor \( p_2 \) are a nearest neighbour of \( p_3 \).
 
-This generalises to the \( k \)-Nearest Neighbours graph, in which each point is connected
+This generalises to the \( k \)-nearest neighbours graph, in which each point is connected
 to its \( k \)-th nearest neighbours, that is, the \( k \)-th closest points to it. The
 resulting graph is still directed. We obtain the undirected \emph{mutual} \( k \)-nearest
 neighbours graph by connecting two points if and only if there are edges between them
@@ -44,14 +48,12 @@ for a higher \( k \) is exactly the one we exploit when combining the \MKNN grap
 persistent homology, for outliers will presumably become classes in	\( H_0 \) with few
 elements and with a long lifetime. 
 
-\section{The steps of the algorithm}
-The whole process from the input of the data until the output of the persistence barcode
-is divided in three rough steps. First, the data is formatted into the expected format and
-wrapped in a class which knows how to compute its \MKNN	graph for any \( k \). Then, the
-filtration is built and suitably stored. Finally the actual computation of the persistence
-homology takes place. We now describe each of these in detail and how the mathematical
-considerations of each step are reflected in the implementation. The code for the whole
-library is available at \url{https://github.com/arnaumas/mknn_homology/}. 
+\section{The steps of the detector}
+The whole process from input to output is roughly divided in four steps. First, the data is
+shaped into an expected format and wrapped in a class which knows how to compute its
+\MKNN	graph for any \( k \). Then, the filtration is built and suitably stored. Finally
+the actual computation of the persistence homology takes place. And then, based on the
+results of the persistent homology, each point is given an ``outlier-ness'' score. 
 
 \subsection{Constructing the M\texorpdfstring{\( k \)}{k}NN graph}
 The input is assumed to be in the form of a \textsf{NumPy} array of shape \( (N,d) \)
@@ -130,8 +132,10 @@ This list is then sorted by birth, such that cliques born earlier appear first, 
 cliques with the same birth are sorted by increasing dimension. This guarantees that any
 simplex is always preceded by its faces, which is required for later computations. 
 
-\subsection{Justification of the algorithm}\label{sec:justification}
-The main idea of the algorithm used to compute the persistent homology is taken from
+
+\subsection{Computing the homology}\label{sec:justification}
+\subsubsection{The main idea}
+The algorithm used to compute the persistent homology is based on the one employed in 
 \cite{campos}. Informally, the idea is to start at the beginning of the filtration and to
 process every cimplex in order of appearance in the filtration. Whenever a new simplex is
 born one of two thing can happen: it either closes a cycle, thus a new class in a homology
@@ -182,8 +186,9 @@ collapsing several steps of \( L \) into 1. This is essentially what is done in 
 look at every simplex as a step in a larger filtration and then keep all of the cycles
 that survive for at least a step in the original filtration. 
 
+\subsubsection{The actual computation}
+Let's now see how the idea just described can be implemented. 
 
-\subsection{Computing the homology}
 The classes \texttt{Simplex} and \texttt{Chain} can be used to calculate with the chain
 groups. As mentioned before, a \texttt{Simplex} simply wraps a clique as well as its
 birth. It also has the property \texttt{faces}, which returns a list of the faces of the
@@ -240,5 +245,22 @@ so, we can solve for one of the faces as the sum of the rest, i.e.,
 We do this for the youngest face of \( \sigma \) and update its homology class to one
 generated by the sum of all faces of \( \sigma \) except for it. This way we build up the
 projection map as we go along. 
+
+\subsection{Detecting the outliers}
+What does it mean for a point to be an outlier? Intuitively, a point is an outlier if it
+is far removed from any cluster. We can use the knowledge of the persistent homology to
+precisely find out which of these points fit this criterion. As stated in
+\cref{sec:meaning}, the 0th homolgy group contains the information on the number of
+connected components. We know that at the first step of the filtration all we have are the
+points themselves, so that the dimension of \( H_0 \) is the number of points. As more
+simplices begin to appear, some of these classes will begin to die as they start to merge
+with each other. Thus, if a point is an outlier, we expect the homology class it generates
+to live for a considerable time as it will take a relatively high value of \( k \) for the
+big clusters to start seeking neighbours outside of them, and to never gain a large number
+of representatives. We have access to both of these pieces of information, the lifetime of
+each homology class and the number of representatives it has when it dies. If we plot all
+of the points in the cloud in a lifetime vs. size chart, the outliers will be those
+closest to the lower right-hand corner, i.e. those which lived for a long time without
+merging with any other cluster. 
 
 \end{document}

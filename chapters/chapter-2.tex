@@ -244,7 +244,7 @@ B_\epsilon(p_j) \neq \emptyset \). Since this is the case for any pair of vertic
 \sigma \), \( \sigma \) is an \( n \)-cell of \( V(X) \), by definition. The converse
 is very similarly shown. 
 
-The filtration used for the algorithm is based on the clique complex of the mutual \( k
+The filtration used in the detector is based on the clique complex of the mutual \( k
 \)-nearest neighbours graph of the point cloud. 
 
 \section{The algebraic side: chain complexes and homology groups}\label{sec:algebraic
@@ -441,6 +441,20 @@ really reflect geometric aspects and which are byproducts of background noise. T
 will be, roughly speaking, those which are present at a large range of scales, i.e. those
 which are \emph{persistent}. We now formalise these ideas.
 
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width = 15cm]{drawings/filtration}
+	\caption{Four different steps of a filtration and their first two Betti numbers. At the
+		first step, the complex consist of four isolated points. At the next step, three
+		1-simplices connect all the points but no combination of them is a cycle, so the dimension
+		of \( H_1(K^1) \) is still 0. At the next step, the simplex \( [p_1,p_2] \) closes the
+		cycle \( c = [p_0,p_1] + [p_1,p_2] + [p_2,p_3] + [p_3,p_0] \)	which is not the boundary of
+		anything (there are no 2-simplices), and so the dimension of \( H_1(K^2) \) becomes 1.
+		Finally, a 2-cell is born, but this is not sufficient to kill the class of \( c \).
+	Indeed, \( f_2^3(c) = c = [p_0,p_1] + [p_1,p_3] + [p_3,p_0] + \partial[p_1,p_2,p_3] \).}
+	\label{fig:filtration}
+\end{figure}
+
 \begin{definition}[Filtration]
 	A \emph{filtration} is a family of simplicial complexes \( \set{K_i}_{i = 0}^n \)	such
 	that \( K_i \) is a subcomplex of \( K_{i+1} \),
@@ -461,21 +475,9 @@ which we will write as \( f_i^j \) for short. We say a certain class is \emph{bo
 \emph{dies at \( j \)} if it is in the kernel of \( f_i^j \) but not of \( f_i^k \) for \(
 k < j \). The difference \( j - i \) is called its \emph{persistence} or \emph{lifetime}. 
 
-This is a reflection at the level of homology of how the shape of the complex changes at
-every step of the filtration. See \cref{fig:filtration} for a detailed example.
-\begin{figure}[htb]
-	\centering
-	\includegraphics[width = 15cm]{drawings/filtration}
-	\caption{Four different steps of a filtration and their first two Betti numbers. At the
-		first step, the complex consist of four isolated points. At the next step, three
-		1-simplices connect all the points but no combination of them is a cycle, so the dimension
-		of \( H_1(K^1) \) is still 0. At the next step, the simplex \( [p_1,p_2] \) closes the
-		cycle \( c = [p_0,p_1] + [p_1,p_2] + [p_2,p_3] + [p_3,p_0] \)	which is not the boundary of
-		anything (there are no 2-simplices), and so the dimension of \( H_1(K^2) \) becomes 1.
-		Finally, a 2-cell is born, but this is not sufficient to kill the class of \( c \).
-	Indeed, \( f_2^3(c) = c = [p_0,p_1] + [p_1,p_3] + [p_3,p_0] + \partial[p_1,p_2,p_3] \).}
-	\label{fig:filtration}
-\end{figure}
+What this gives is a reflection at the level of homology of how the shape of the complex
+changes at every step of the filtration. See \cref{fig:filtration} for a detailed example.
+
 The information that persistent homology is often encoded into what is known as a
 \emph{barcode}, which is the birth and death of every element of the homology groups that
 has lived at any of the steps of the filtration. 

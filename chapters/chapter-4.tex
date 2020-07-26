@@ -1,15 +1,76 @@
 \documentclass[../main.tex]{subfiles}
 
 \begin{document}
+In this chapter the detector is tested, first with a toy example and then with actual
+radiomic data provided by the VHIO. 
 
+\section{A toy example}
+Let's test the detector with a toy dataset, which can be seen in \cref{fig:clusters}.
 \begin{figure}[htb]
 	\centering \small \sffamily
-	\input{figs/plots/rad-26.pgf}
+	\input{figs/plots/clusters.pgf}
+	\caption{Custom point cloud to illustrate the working of the detector. This set has two
+	clusters, the orange and purple points; and two outliers, the green and blue points.}
+	\label{fig:clusters}
 \end{figure}
-
+This dataset has two large clusters and two clear outliers, which we expect to be able to
+detect. The result of running the detector with this set can be seen in \cref{fig:toy
+results}. 
 \begin{figure}[htb]
 	\centering \small \sffamily
 	\input{figs/plots/test-persistence.pgf}
+	\caption{The result of running the detector on the point cloud of \cref{fig:clusters}.
+		Both outliers are clearly visible as such, since they lie in the lower right of the
+	plot, as is to be expected.}
+	\label{fig:toy results}
 \end{figure}
+On the lower left we see a lot of orange and purple dots. These reflect the fact that in
+the early stages of the filtration, most of the classes in the clusters will quickly merge
+with their neighbours so they never reach large sizes. Then, once the two main clusters
+have become connected, no more deaths happen for some time. Then, roughly at the halfway
+point of the filtration, both outliers get absorbed into the two main clusters, as the
+blue and green dots represent. Then we see the death of the orange cluster as it merges
+into the purple cluster. In this situation, it makes sense that both outliers are absorbed
+first, since they are closer to the main clusters than the two main clusters are to each
+other. Finally, the purple cluster dies as the filtration ends, having absorbed every
+point. 
+
+\section{A test with real radiomic signatures}
+A preliminary study of TOPiomics was an investigation into which radiomic features are best
+correlated to the response to a certain treatment \cite{features}. Out of the whole range
+of features computed by \textsf{PyRadiomics}, 26 were found to have the highest
+correlation. The data from this study was kindly provided by VHIO to test the detector. It
+consists of the radiomic signature of 20 patients, as well as data related to the
+their genomics. The detector was run on both the radiomic and genomic feature spaces to
+see if there is a relationship between the clustering structure in both. The results can
+be seen in \cref{fig:rad,fig:gen}. Points labeled with the same number represent the same
+patient. 
+\begin{figure}[p]
+	\centering \small \sffamily
+	\input{figs/plots/rad-26.pgf}
+	\caption{The clustering information obtained from the outlier detector on the test
+	radiomic data.}
+	\label{fig:rad}
+\end{figure}
+
+\begin{figure}[p]
+	\centering \small \sffamily
+	\input{figs/plots/gen-26.pgf}
+	\caption{The clustering information obtained from the outlier detector on the test
+	genomic data.}
+	\label{fig:gen}
+\end{figure}
+
+In the radiomic feature space we see a lot of clustering early on, and then a large
+cluster (12) which dies halfway through. This seems to indicate two main clusters. However no
+clear outliers can be seen. In the genomic space the situation is somewhat similar, with
+again a lot of clustering early on and a somewhat large cluster (12) that dies a little later,
+which again seems to indicate two main clusters. We also see a very clear outlier (6),
+that is not absorbed into the main cluster until the very end of the filtration. 9 could
+also be seen as an outlier, since it is absorbed into the main cluster after 12, but it
+does not persist for very long.
+
+These results have been sent back to VHIO to determine what is the medical significance,
+if any, that they have. 
 
 \end{document}
