@@ -1,9 +1,9 @@
 \documentclass[../main.tex]{subfiles}
 
 \begin{document}
-\section{Why Mutual \texorpdfstring{\( k \)}{k}-Nearest Neighbours Graphs?}
+\section{Why mutual \texorpdfstring{\( k \)}{k}-nearest neighbours graphs?}
 As stated in \cref{sec:prior work}, the first approach to identify clusters and outliers
-in a dataset was by finding the maximal cliques of the Mutual \( k \)-Nearest Neighbours
+in a dataset was by finding the maximal cliques of the mutual \( k \)-nearest neighbours
 graph, \MKNN graph for short. Let's describe how it is constructed to better understand
 its usefulness. 
 
@@ -12,14 +12,16 @@ One starts with the Nearest Neighbours graph. Given a point cloud, \( C
 prescription: there is an edge from \( p \) to \( q \) if and only if \( d(p,q) = \min_{r
 	\in C} d(p,r) \), so \( q \) is the closest point to \( p \), its \emph{nearest
 neighbour}. The reason the graph is directed is because the relation of being a nearest
-neighbour is not symmetric (think of three points, two of which are close together, while
-the third one is far away: the firs two are nearest neighbours of each other, and the
-third is a nearest neighbour of one of the first two, but not the other way around). 
+neighbour is not symmetric. Indeed, consider three points \( p_1, p_2, p_3 \) which all
+lie in a straight line in this order. Let \( d_{12} = d(p_1, p_2) \)  and \( d_{23} =
+d(p_2,p_3) \) and suppose \( d_{12} < d_{23} \). Then, \( p_2 \) is \( p_1 \)'s
+nearest-neighbour, and vice versa. Yet \( p_2 \) is also \( p_3 \)'s nearest neighbour but
+neither \( p_1 \) nor \( p_2 \) are a nearest neighbour of \( p_3 \).
 
 This generalises to the \( k \)-Nearest Neighbours graph, in which each point is connected
 to its \( k \)-th nearest neighbours, that is, the \( k \)-th closest points to it. The
-resulting graph is still directed. We obtain the undirected \emph{Mutual} \( k \)-Nearest
-Neighbours graph by connecting two points if and only if there are edges between them
+resulting graph is still directed. We obtain the undirected \emph{mutual} \( k \)-nearest
+neighbours graph by connecting two points if and only if there are edges between them
 in both directions, i.e. if they are \emph{mutual} \( k \)-nearest neighbours. 
 
 \begin{figure}[htb]

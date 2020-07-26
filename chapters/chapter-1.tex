@@ -14,7 +14,7 @@ thesis fit into the bigger picture.
 Radiomics is a relatively recent medical field. Its principal aim is to establish a
 relationship between a patient's response to treatment and what are known as
 \emph{radiomic features} of a lesion. These are parameters systematically extracted from
-scans of a lesion or other feature. The hypothesis is that there is information
+scans of a lesion such as a tumour or a nodule. The hypothesis is that there is information
 that can be extracted from this more systematic study of medical scans, which is not
 accessible through the more traditional qualitative observation by a medical professional.
 Furthermore, since imaging is much less invasive than other techniques such as biopsy, if
@@ -28,15 +28,15 @@ large volumes of data are not well suited to radiomics. In this context, TOPiomi
 \cite{topiomics, attract} attempts to bridge the gap by employing tools from
 \emph{topological data analysis}. Specifically, the goal of TOPiomics is to detect
 outliers as early as possible, so that specialised treatments can be developed as soon as
-possible. The approach thus far is based on what is known as the \emph{Mutual \( k
-\)-Nearest Neighbours graph} \cite{outliers}. Nevertheless, there is an amount of
-parameter fiddling involved (the \( k \) in \( k \)-Nearest neighbours)	to guarantee that
+possible. The approach thus far is based on what is known as the \emph{mutual \( k
+\)-nearest Neighbours graph} \cite{outliers}. Nevertheless, there is an amount of
+parameter fiddling involved (the \( k \) in \( k \)-nearest neighbours)	to guarantee that
 the results are accurate and not an artifact of the choice of \( k \). The idea was then
 to use \emph{persistent homology}, since it is suited to the study of the topological
 structure of a data set at various scales. , since it is suited to the study of the
 topological structure of a data set at various scales. 
 
-The work performed in this thesis is the implementation of a library which computes
+The work carried out in this thesis is the implementation of a library which computes
 persistent homology and its application to radiomic datasets in an attempt to detect
 outliers. 
 
