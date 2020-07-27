@@ -35,22 +35,60 @@
 	\vspace{1cm}
 	{\large \itshape Supervised by}
 
-	{\Large Dr. Albert Ruiz}
-
-
-
-	\vfill
+	{\Large Dr Albert Ruiz}
 \end{titlepage}
 \thispagestyle{empty}
 
 \pagestyle{plain}
 \frontmatter
-{\footnotesize \tableofcontents}
+{\footnotesize \sffamily \tableofcontents}
 
 \pagebreak
 \addcontentsline{toc}{chapter}{Preface}
 \section*{Preface}
-Lorem ipsum
+The present work is the result of an internship in the Interactive Augmented Modelling
+(IAM) at the Computer Vision Center (CVC). Since the month of october I have been
+contributing to the project TOPiomics, which is an ongoing collaboration,
+between the IAM and the Radiomics Group at the Vall d'Hebron Institute of
+Oncology (VHIO). TOPiomics aims to use tools from mathematics to aid in the data analysis
+aspects of the medical field of radiomics. The usual tools such as machine learning or
+even less sophisticated statistical analysis fail because the volume of test data is
+limited ---this is a common occurence with clinical data---. One of the possible solutions
+to this problem is in the field of \emph{topological data analysis}, which seeks to
+apply ideas from topology to answer questions related to the shape and local structure
+of the data. 
+
+One of the principal problems that TOPiomics is trying to solve is that of \emph{early outlier
+detection}. This has to do with detecting patients, typically cancer patients, who will
+potentially not respond well to existing treatments because of abnormalities presented by
+their tumour. The idea is then to develop ways of detecting these outliers in the radiomic
+feature space, i.e. by analysing the \emph{radiomic signature} of the lesion which is
+extracted through imaging techniques.
+
+A first approach was developed in \cite{topiomics} but it was desirable to make it less
+dependent on adequate choices for parameter values. These choices ultimately had to do
+with the scales at which the detection was performed. It was then proposed to incorporate
+ideas from \emph{persistent homology} to help solve this problem, since this field
+deals precisely with the problems realted to trying to determine the shape of data in a
+way independent of scale, or rather, by factoring in scale as part of the process. 
+
+The principal contribution of the thesis, then, is the development and implementation of
+an outlier detector based on these ideas, which builds on the existing approach.
+\cref{ch:problem} presents a more detailed description of the particulars of radiomics,
+outlier detection and TOPiomics. In \cref{ch:theory} we give an overview of the principal
+mathematical objects which are used in persistent homology, which are then put to use in
+\cref{ch:implementation}, which contains a description of the implementation of the
+detector and the different mathematical considerations that went into it. Finally, in
+\cref{ch:results}, the detector is tested with an artificially generated test dataset and with actual
+clinical data provided by VHIO. The input of VHIO is needed to determine how relevant all
+of this is to the medical side, nevertheless the results seem promising from a purely
+mathematical standpoint.  
+
+\paragraph{Acknowledgements}
+I would like to thank CVC, and more specifically Dr Debora Gil and Dr Oriol Terrades for
+agreeing to have me as an intern in their group. I am also grateful to Dr Albert Ruiz
+for his valuable and helpful supervision. Finally, I want to thank my family and my father
+in particular for their support during the whole process. 
 
 \mainmatter
 \pagestyle{main}
@@ -58,13 +96,13 @@ Lorem ipsum
 \chapter{The problem}\label{ch:problem}
 \subfile{chapters/chapter-1}
 
-\chapter{An overview of homology theory}
+\chapter{An overview of homology theory}\label{ch:theory}
 \subfile{chapters/chapter-2}
 
-\chapter{The implementation of the detector}
+\chapter{The implementation of the detector}\label{ch:implementation}
 \subfile{chapters/chapter-3}
 
-\chapter{The results}
+\chapter{The results}\label{ch:results}
 \subfile{chapters/chapter-4}
 
 \backmatter

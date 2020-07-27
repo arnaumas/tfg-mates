@@ -15,7 +15,9 @@ Let's test the detector with a toy dataset, which can be seen in \cref{fig:clust
 \end{figure}
 This dataset has two large clusters and two clear outliers, which we expect to be able to
 detect. The result of running the detector with this set can be seen in \cref{fig:toy
-results}. 
+results}. The labels are such that each individual point can be identified in the
+persistence diagram (the point labeled as \( n \) in \cref{fig:toy results} is the
+lifetime and size of the point labeled as \( n \) in \cref{fig:clusters}). 
 \begin{figure}[htb]
 	\centering \small \sffamily
 	\input{figs/plots/test-persistence.pgf}
@@ -36,15 +38,15 @@ other. Finally, the purple cluster dies as the filtration ends, having absorbed 
 point. 
 
 \section{A test with real radiomic signatures}
-A preliminary study of TOPiomics was an investigation into which radiomic features are best
-correlated to the response to a certain treatment \cite{features}. Out of the whole range
-of features computed by \textsf{PyRadiomics}, 26 were found to have the highest
-correlation. The data from this study was kindly provided by VHIO to test the detector. It
-consists of the radiomic signature of 20 patients, as well as data related to the
-their genomics. The detector was run on both the radiomic and genomic feature spaces to
-see if there is a relationship between the clustering structure in both. The results can
-be seen in \cref{fig:rad,fig:gen}. Points labeled with the same number represent the same
-patient. 
+A preliminary study of TOPiomics was an investigation into which radiomic features
+extracted from a lung tumour scan are best correlated to the response to a certain
+treatment \cite{features}. Out of the whole range of features computed by
+\textsf{PyRadiomics}, 26 were found to have the highest correlation. The data from this
+study was kindly provided by VHIO to test the detector. It consists of the radiomic
+signature of 20 patients, as well as data related to the their genomics. The detector was
+run on both the radiomic and genomic feature spaces to see if there is a relationship
+between the clustering structure in both. The results can be seen in
+\cref{fig:rad,fig:gen}. Points labeled with the same number represent the same patient. 
 \begin{figure}[p]
 	\centering \small \sffamily
 	\input{figs/plots/rad-26.pgf}
@@ -70,7 +72,25 @@ that is not absorbed into the main cluster until the very end of the filtration.
 also be seen as an outlier, since it is absorbed into the main cluster after 12, but it
 does not persist for very long.
 
-These results have been sent back to VHIO to determine what is the medical significance,
-if any, that they have. 
+\section{Conclusions}
+As can be seen from the results from the test run, it appears that the detector is
+successful in providing a way to evaluate which points are outliers and which measure. The
+results from the run on the clinical data have been sent back to VHIO for their input on
+what is their clinical significance, if any. 
+
+There are three main points related to further work on the project:
+\begin{enumerate}[(i)]
+	\item First there is the question of the efficiency of the program. Some trial runs
+		suggested that the runtime does not scale well with the number of points nor the
+		ambient dimension. It appears the main bottleneck is the building of the filtration.
+		As mentioned before, there are ways to optimise this process (see \cite{tidyset}). 
+	\item There is also the question of the robustness of the detector: how well does it
+		perform with certain edgecases. Two factors seem to be important: the diameter of the
+		clusters and the distance between them. The detector could be stress tested with
+		various combinations of these two values. 
+	\item Finally, the detector only uses information gathered from the zeroth homology
+		group. Since the dimension of the spaces we are dealing with is high, the homology
+		groups of higher dimension could be exploited somehow. 
+\end{enumerate}
 
 \end{document}

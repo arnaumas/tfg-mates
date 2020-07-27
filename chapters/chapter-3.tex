@@ -38,15 +38,15 @@ in both directions, i.e. if they are \emph{mutual} \( k \)-nearest neighbours.
 
 Looking at \cref{fig:mknn} we see the 2-nearest neighbours and mutual 2-nearest neighbours
 graphs for the same point cloud. In a \( k \)NN	 graph, it is always the case that every
-vertex has \( k \) edges, which means that even points which are far away from any cluster
-are connected to some other points. This is not very useful if we wish to detect outliers.
-However, when taking the \emph{mutual} version, many of this edges disappear. Indeed, now,
-for an outlier to become connected to a cluster a higher \( k \) will be required so that
-every point within the cluster has become connected to all of its immediate neighbours and
-is forced to ``look'' outside the cluster for additional neighbours. This idea of waiting
-for a higher \( k \) is exactly the one we exploit when combining the \MKNN graph with
-persistent homology, for outliers will presumably become classes in	\( H_0 \) with few
-elements and with a long lifetime. 
+vertex has \( k \) edges coming out from it, which means that even points which are far
+away from any cluster are connected to some other points. This is not very useful if we
+wish to detect outliers.  However, when taking the \emph{mutual} version, many of these
+edges disappear. Indeed, now, for an outlier to become connected to a cluster a higher \(
+k \) will be required so that every point within the cluster has become connected to all
+of its immediate neighbours and is forced to ``look'' outside the cluster for additional
+neighbours. This idea of waiting for a higher \( k \) is exactly the one we exploit when
+combining the \MKNN graph with persistent homology, for outliers will presumably become
+classes in	\( H_0 \) with few elements and with a long lifetime. 
 
 \section{The steps of the detector}
 The whole process from input to output is roughly divided in four steps. First, the data is
@@ -63,7 +63,7 @@ which implements a method to compute the \MKNN graph for a given \( k \).
 
 The procedure to encode this graph is as follows. First, the distance matrix, \( D \), for
 the data set is computed. If we index the points of the cloud by \( C = \set{p_i}_{i =
-1}^n \), then this matrix contains the difference between every pair of points:
+1}^n \), then this matrix contains the distance between every pair of points:
 \begin{equation*}
 	D_{ij} = d(p_i, p_j). 
 \end{equation*}
@@ -104,7 +104,7 @@ claim.
 
 There are a couple caveats. First, we restrict the top dimension of the complex to the
 ambient dimension \( d \), which means we will ignore any clique with more than \( d+1 \)
-vetices. This is because homology at a dimension higher than this does not have much
+vettices. This is because homology at a dimension higher than this does not have much
 geometric meaning (the points that would generate such simplicies are necessarily not
 geometrically independent). Secondly, the matter of the upper bound for \( k \). A
 generous upper boud is \( N-1 \) which results in the \MKNN graph being fully connected,
@@ -137,7 +137,7 @@ simplex is always preceded by its faces, which is required for later computation
 \subsubsection{The main idea}
 The algorithm used to compute the persistent homology is based on the one employed in 
 \cite{campos}. Informally, the idea is to start at the beginning of the filtration and to
-process every cimplex in order of appearance in the filtration. Whenever a new simplex is
+process every simplex in order of appearance in the filtration. Whenever a new simplex is
 born one of two thing can happen: it either closes a cycle, thus a new class in a homology
 group appears, or it does not, in which case what used to be a cycle (because of how the
 filtration is sorted, the faces of a simplex always appear before it) is now the boundary
@@ -153,7 +153,7 @@ the difference between successive steps of \( L \) is a single simplex. Indeed, 
 	L^{k} = L^{(k-1)} \cup \set{\sigma_k^1} \\
 	L^{l_1 + \dots + l_q + k} = L^{l_1 + \dots + l_q + (k-1)} \cup \set{\sigma_k^{q+1}}.
 \end{gather*}
-For this to acutally be a filtration, the order in which we add the simplices has to be
+For this to actually be a filtration, the order in which we add the simplices has to be
 such that every simplex is always preceded by its faces. And note \( K^i = L^{l_1 + \dots
 + l_i} \). So what we are doing is splitting every step of the filtration and creating a
 new filtration by adding simplicies one by one. 
@@ -182,7 +182,7 @@ Every cycle must be born and die at one of the steps of \( L \), so by doing thi
 every single simplex of the whole filtration we will detect the birh and death of every
 cycle. Now, when going back to the smaller filtration \( K \), it might very well be the
 case that several cycles are born and die in a single step of \( K \), since we are
-collapsing several steps of \( L \) into 1. This is essentially what is done in the code:
+collapsing several steps of \( L \) into one. This is essentially what is done in the code:
 look at every simplex as a step in a larger filtration and then keep all of the cycles
 that survive for at least a step in the original filtration. 
 
