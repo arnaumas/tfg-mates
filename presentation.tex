@@ -170,13 +170,133 @@
 		\partial_n [p_0, \dots, p_n] \defeq \sum_{k = 0}^{n} (-1)^k [p_0, \dots, \hat p_k,
 		\dots, p_n]
 	\end{equation*}
+	and extending to chains. 
 	\pause
-	\centering \includegraphics[width=0.7\textwidth]{drawings/boundary}
-	
+
+	\centering{\includegraphics[width=0.7\textwidth]{drawings/boundary}}
 \end{frame}	
 
-\section{The detector}
+\begin{frame}
+	\frametitle{Boundaries and cycles}
+	\begin{itemize}
+		\item \emph{Cycles:} chains with no boundary,
+			\begin{equation*}
+				Z_n(K) \defeq \ker{\partial_n} \subseteq C_n(K)
+			\end{equation*}
+			\pause
 
+		\item \emph{Boundaries:} chains which are the boundary of a higher-dimensional chain,
+			\begin{equation*}
+				B_n(K) \defeq \im{\partial_{n+1}} \subseteq C_n(K)
+			\end{equation*}
+		\pause
+
+		\begin{block}{Fact}
+			\begin{equation*}
+				\partial_n \circ \partial_{n+1} = 0
+			\end{equation*}
+			so boundaries are always cycles. 
+		\end{block}
+			
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Homology groups}
+	Homology groups are the quotients
+	\begin{equation*}
+		H_n(K) \defeq Z_n(K)/B_n(K).
+	\end{equation*}
+	\pause
+	
+	The key insight: Homology groups measure \alert{cycles which are not boundaries.} \pause
+	They tell us about the number of \( n \)-dimensional holes in our space. 
+\end{frame}
+
+\begin{frame}
+	\frametitle{What is persistence?}
+	Instead of a single simplicial complex, consider a \emph{filtration},
+	\begin{equation*}
+		K^0 \subseteq K^1 \subseteq \cdots \subseteq K^N.
+	\end{equation*}
+	\pause
+	Then look at this evolution at the level of homology
+	\only<1>{
+		\begin{equation*}
+			H_d^0(K) \into H_d^1(K) \into \cdots \into H_d^N(K)
+		\end{equation*}
+	}
+	\only<2>{
+		\begin{equation*}
+			H_{\textcolor{red}{d}}^0(K)
+			\into H_{\textcolor{red}{d}}^1(K) 
+			\into \cdots 
+			\into H_{\textcolor{red}{d}}^N(K) 
+		\end{equation*}
+	}
+	\only<3>{
+		\begin{equation*}
+			H_d^{\textcolor{red}{0}}(K)
+			\into H_d^{\textcolor{red}{1}}(K) 
+			\into \cdots 
+			\into H_d^{\textcolor{red}{N}}(K) 
+		\end{equation*}
+	}
+
+	\uncover<3>{The steps of the filtration can be thought of as time}
+\end{frame}
+
+\begin{frame}
+	\frametitle{What is persistence?}
+	Because of functoriality, there are maps between the different steps of homology,
+	\begin{equation*}
+		f_i^j \colon H_d^i(K) \to H_d^j(K).
+	\end{equation*}
+	\pause
+	At each step, classes can be born (not in the image of \( f_i^{i+1} \)), die (in the
+	kernel of \( f_i^{i+1} \)) or merge (have the same image through \( f_i^{i+1} \)).
+\end{frame}
+
+\begin{frame}
+	\frametitle{An example}
+	\centering
+	\only<1>{\includegraphics[width=\textwidth]{beamer/filt-1}}
+	\only<2>{\includegraphics[width=\textwidth]{beamer/filt-2}}
+	\only<3>{\includegraphics[width=\textwidth]{beamer/filt-3}}
+	\only<4>{\includegraphics[width=\textwidth]{beamer/filt-4}}
+
+	\only<1>{\( [p_0], [p_1], [p_2], [p_3] \) are born.}
+	\only<2>{\( [p_0], [p_1], [p_2], [p_3] \) merge.}
+	\only<3>{The cycle \( [p_0,p_1] + [p_1,p_2] + [p_2,p_3] + [p_3,p_4] \) is born.}
+	\only<4>{The cycle does not die.}
+\end{frame}
+
+\section{The detector}
+\begin{frame}
+	\frametitle{Why the \MKNN graph?}
+	It is good for detecting clusters in a data set. 
+	\begin{center}
+		\includegraphics[width=\textwidth]{drawings/mknn}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The outlier detection algorithm}
+	The algorithm has four main parts: \pause
+	\begin{itemize}
+		\item The class \texttt{Cloud} stores a point cloud and computes its \MKNN graph.
+			\pause
+		\item The class \texttt{Filtration} builds up the filtration. \pause
+		\item The class \texttt{Homology} computes the homology. \pause
+		\item The persistence data of each class is gathered and plotted to detect the
+			outliers. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The class \texttt{Cloud}}
+	
+\end{frame}
 
 \section{The results}
 \begin{frame}
