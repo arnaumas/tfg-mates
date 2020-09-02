@@ -54,7 +54,7 @@ homology}}
 \setbeamerfont{frametitle}{series=\bfseries}
 \setbeamertemplate{frametitle}{%
   \nointerlineskip
-    \begin{beamercolorbox}[sep=0.5ex,wd=\paperwidth,leftskip=.2cm,rightskip=.2cm]{frametitle}%
+    \begin{beamercolorbox}[sep=0.5ex,wd=\paperwidth,leftskip=.2cm,rightskip=0cm]{frametitle}%
       \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle
       \hfill
       \raisebox{-0.3\height}{\includegraphics[scale = 0.04]{logo-uab-blanc}}
@@ -78,6 +78,11 @@ homology}}
 		\titlepage
 	\end{frame}
 }
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
 
 \section{The problem}
 
@@ -120,7 +125,7 @@ homology}}
 
 	\begin{center}
 		\includegraphics[width = 3cm]{beamer/logo-cvc}
-		\hfill
+		\quad
 		\includegraphics[width = 3cm]{beamer/logo-vhio}
 	\end{center}
 
@@ -271,7 +276,7 @@ homology}}
 	They tell us about the number of \( n \)-dimensional holes in our space. 
 	
 	\pause
-	Homology is invariant under homotopy, weaker than invariance under homoemorphism. 
+	Homology is invariant under homotopy, weaker than invariance under homeomorphism. 
 	
 	
 \end{frame}
@@ -456,13 +461,13 @@ homology}}
 \begin{frame}
 	\frametitle{A run with toy data}
 	\centering
-	\includegraphics[width=\textwidth]{beamer/clusters}
+	\includegraphics[width=0.9\textwidth]{beamer/clusters}
 \end{frame}
 
 \begin{frame}
 	\frametitle{A run with toy data}
 	\centering
-	\includegraphics[width=\textwidth]{beamer/toy-results}
+	\includegraphics[width=0.9\textwidth]{beamer/toy-results}
 \end{frame}
 
 \begin{frame}
@@ -479,13 +484,13 @@ homology}}
 \begin{frame}
 	\frametitle{A run with real data}
 	\centering
-	\includegraphics[width = \textwidth]{beamer/radiomic}
+	\includegraphics[width = 0.9\textwidth]{beamer/radiomic}
 \end{frame}
 
 \begin{frame}
 	\frametitle{A run with real data}
 	\centering
-	\includegraphics[width = \textwidth]{beamer/genomic}
+	\includegraphics[width = 0.9\textwidth]{beamer/genomic}
 \end{frame}
 
 \begin{frame}
